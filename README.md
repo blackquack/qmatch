@@ -1,3 +1,3 @@
 # qmatch
 
-A app for scheduling 
+An app for scheduling 
