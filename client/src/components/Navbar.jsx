@@ -3,14 +3,17 @@ import React from 'react';
 export default class Navbar extends React.Component {
     constructor() {
         super();
-        this.state = {filesInput: 'sd'}
+        this.state = { fileName: 'Choose file...' }
     }
 
-    uploadFileButton(kkk) {
-        console.log(this.state.filesInput, kkk)
+    fileReceived(file) {
+        this.setState({ fileName: file.files[0].name })
+        console.log(file.files[0])
     }
 
     render() {
+        let excelFile = null;
+
         return (
             <div>
                 <nav class="pt-navbar">
@@ -24,11 +27,12 @@ export default class Navbar extends React.Component {
                 <label class="pt-file-upload">
                     <input
                         type="file"
-                        ref={(input) => { this.state.filesInput = input; }}
-                        name="file" />
-                    <span class="pt-file-upload-input">Choose file...</span>
+                        ref={(input) => { excelFile = input }}
+                        name="file"
+                        onChange={() => { this.fileReceived(excelFile) }}
+                    />
+                    <span class="pt-file-upload-input">{this.state.fileName}</span>
                 </label>
-                <button onClick={(event) => {this.uploadFileButton(event)}}>CLICK HERE</button>
             </div>
         );
     }
