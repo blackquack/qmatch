@@ -1,4 +1,5 @@
 import React from 'react';
+import XLSX from "xlsjs";
 
 export default class Navbar extends React.Component {
     constructor() {
@@ -9,6 +10,9 @@ export default class Navbar extends React.Component {
     fileReceived(file) {
         this.setState({ fileName: file.files[0].name })
         console.log(file.files[0])
+        console.log(XLSX)
+        let k = XLSX.readFile(file)
+        console.log(k)
     }
 
     render() {
@@ -27,6 +31,7 @@ export default class Navbar extends React.Component {
                 <label class="pt-file-upload">
                     <input
                         type="file"
+                        accept=".xls"
                         ref={(input) => { excelFile = input }}
                         name="file"
                         onChange={() => { this.fileReceived(excelFile) }}

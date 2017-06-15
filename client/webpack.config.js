@@ -22,8 +22,19 @@ module.exports = {
             { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
             { test: /\.css$/, loader: ['style-loader', 'css-loader'] },
             { test: /\.jsx?$/, loader: "class-to-classname", exclude: /node_modules/ },
-            { test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/, loader: 'file-loader' }
-        ]
+            { test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/, loader: 'file-loader' },
+        ],
+        noParse: [/.*(xlsjs\.js).*/],
     },
-    plugins: [HtmlWebpackPluginConfig]
+    plugins: [HtmlWebpackPluginConfig],
+    // required for xlsx to work with webpack
+    node: {
+        fs: 'empty'
+    },
+    externals: [
+        {
+            './cptable': 'var cptable',
+            './dist/cpexcel': "import './dist/cpexcel'"
+        }
+    ]
 }
