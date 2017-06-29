@@ -9,10 +9,15 @@ export default class Navbar extends React.Component {
 
     fileReceived(file) {
         this.setState({ fileName: file.files[0].name })
-        console.log(file.files[0])
-        console.log(XLSX)
-        let k = XLSX.readFile(file)
-        console.log(k)
+
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            var data = e.target.result;
+            var workbook = XLSX.read(data, { type: 'binary' });
+            console.log(workbook)
+            /* DO SOMETHING WITH workbook HERE */
+        };
+        reader.readAsBinaryString(file.files[0]);
     }
 
     render() {

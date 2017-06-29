@@ -34,7 +34,7 @@ module.exports = {
     externals: [
         {
             './cptable': 'var cptable',
-            './dist/cpexcel': "import './dist/cpexcel'"
+            './jszip': 'jszip'
         }
     ]
 }
